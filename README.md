@@ -9,4 +9,4 @@ Here are some of my solutions from Coursera specialization [Data Science](https:
  * Practical Machine Learning,
  * Developing Data Products.
 
-External Shinny app for *Developing Data Products* course is available on [ShinyApps](https://andre.shinyapps.io/shinyapp/).
+The external Shinny app for *Developing Data Products* course is available on [ShinyApps](https://andre.shinyapps.io/shinyapp/) and the Slidify presentation is available on [Github Pages](https://andre-wojtowicz.github.io/jhu-data-science/presentation).
