@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>IOTA LR2</title>
+  <meta charset="utf-8">
+  <meta name="description" content="IOTA LR2">
+  <meta name="author" content="Andrzej Wójtowicz">
+  <meta name="generator" content="slidify" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/default.css" media="all" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/phone.css" 
+    media="only screen and (max-device-width: 480px)" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/slidify.css" >
+  <link rel="stylesheet" href="libraries/highlighters/highlight.js/css/tomorrow.css" />
+  <base target="_blank"> <!-- This amazingness opens all links in a new tab. -->  
+  
+  <!-- Grab CDN jQuery, fall back to local if offline -->
+  <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.min.js"></script>
+  <script>window.jQuery || document.write('<script src="libraries/widgets/quiz/js/jquery.js"><\/script>')</script> 
+  <script data-main="libraries/frameworks/io2012/js/slides" 
+    src="libraries/frameworks/io2012/js/require-1.0.8.min.js">
+  </script>
+  
+  
+
+</head>
+<body style="opacity: 0">
+  <slides class="layout-widescreen">
+    
+    <!-- LOGO SLIDE -->
+        <slide class="title-slide segue nobackground">
+  <hgroup class="auto-fadein">
+    <h1>IOTA LR2</h1>
+    <h2>Ovarian tumor risk of malignancy index calculator</h2>
+    <p>Andrzej Wójtowicz<br/>Coursera</p>
+  </hgroup>
+  <article></article>  
+</slide>
+    
+
+    <!-- SLIDES -->
+    <slide class="" id="slide-1" style="background:;">
+  <hgroup>
+    <h2>Why do we bother with ovarian tumors?</h2>
+  </hgroup>
+  <article data-timings="">
+    <ol>
+<li>Recent statistics on ovarian tumors shows that incidence and mortality rates are alarmingly high. For example, annual numbers of new cases and deaths in the USA amount to 22,000 and 14,000 [1].</li>
+<li>The correct discrimination between ovarian tumors classes (malignant or benign) is crucial to save life of the people.</li>
+</ol>
+
+<p>[1] Siegel, Rebecca, et al. Cancer statistics, 2014. <em>CA: a cancer journal for clinicians</em>, 2014, 64.1: 9-29.</p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-2" style="background:;">
+  <hgroup>
+    <h2>How we can predict the class of an ovarian tumor?</h2>
+  </hgroup>
+  <article data-timings="">
+    <ol>
+<li>Researchers developed many preoperative models designed for inexperienced gynaecologists. One of them is <strong>LR2</strong> algorithm[2], developed by The International Ovarian Tumor Analysis (IOTA) group. LR2 is a classificator based on a logisic regression method with a cut-off set to 0.1.</li>
+<li>LR2 takes into account 6 features: age of the patient (years), presence of ascites (yes/no), presence of blood flow within a papillary projection (yes/no), largest diameter of the solid component (mm, at most 50 mm), irregular internal cyst wall (yes/no), presence of acoustic shadows (yes/no).</li>
+</ol>
+
+<p>[2] Timmerman, Dirk, et al. Logistic regression model to distinguish between the benign and malignant adnexal mass before surgery: a multicenter study by the International Ovarian Tumor Analysis Group. <em>J Clin Oncol.</em> 2005, 23, 8794-8801.</p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-3" style="background:;">
+  <hgroup>
+    <h2>How does LR2 work?</h2>
+  </hgroup>
+  <article data-timings="">
+    <ol>
+<li>Example: a gynaecologist examines a 33-years woman with a diagnosed ovarian tumor; there are no ascites, blood flow within a papillary projection is present, largest diameter of the solid component equals to 25 mm, internal cyst wall is irregular and acoustic shadows are not present. The malignancy prediction is calculated with the chunk of R code:</li>
+</ol>
+
+<pre><code class="r">LR2 = function(age, ascites, blood_flow, solid_component, internal_wall, acoustic_shadow) {    
+    z =  -5.3718 + 0.0354 * age + 1.6159 * ascites + 1.1768 * blood_flow + 
+          0.0697 * min(solid_component, 50) + 0.9586  * internal_wall - 2.9486 * acoustic_shadow
+    return( 1/(1+exp(-z)) )}
+
+val = LR2(33, 0, 1, 25, 1, 0)
+print( paste(&quot;malignancy character:&quot;, ifelse(val&gt;0.1, &quot;malignant&quot;, &quot;benign&quot;)) )
+</code></pre>
+
+<pre><code>## [1] &quot;malignancy character: malignant&quot;
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-4" style="background:;">
+  <hgroup>
+    <h2>Where and how a gynaecologist can use LR2?</h2>
+  </hgroup>
+  <article data-timings="">
+    <ol>
+<li>The working online implementation of LR2 algorithm is available at <a href="https://andre.shinyapps.io/shinyapp">https://andre.shinyapps.io/shinyapp</a></li>
+<li>It is easy to use and also draws interactively a logistic regression plot for a given query. Below is a plot for the example on the previous slide:</li>
+</ol>
+
+<p><img src="assets/fig/unnamed-chunk-2-1.png" alt="plot of chunk unnamed-chunk-2"></p>
+
+<p>Enjoy LR2 and fight against cancer!</p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+    <slide class="backdrop"></slide>
+  </slides>
+  <div class="pagination pagination-small" id='io2012-ptoc' style="display:none;">
+    <ul>
+      <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=1 title='Why do we bother with ovarian tumors?'>
+         1
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=2 title='How we can predict the class of an ovarian tumor?'>
+         2
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=3 title='How does LR2 work?'>
+         3
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=4 title='Where and how a gynaecologist can use LR2?'>
+         4
+      </a>
+    </li>
+  </ul>
+  </div>  <!--[if IE]>
+    <script 
+      src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js">  
+    </script>
+    <script>CFInstall.check({mode: 'overlay'});</script>
+  <![endif]-->
+</body>
+  <!-- Load Javascripts for Widgets -->
+  
+  <!-- LOAD HIGHLIGHTER JS FILES -->
+  <script src="libraries/highlighters/highlight.js/highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  <!-- DONE LOADING HIGHLIGHTER JS FILES -->
+   
+  </html>
