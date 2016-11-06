@@ -1,6 +1,6 @@
 # Data Science - Coursera Specialization
 
-Here are some of my solutions from Coursera specialization [Data Science](https://www.coursera.org/specializations/jhu-data-science) by Johns Hopkins University in 2015:
+Here are some of my R solutions for courses in [Data Science](https://www.coursera.org/specializations/jhu-data-science) specialization by Johns Hopkins University on Coursera in 2015:
 
  * Exploratory Data Analysis,
  * Reproducible Research,
